@@ -162,7 +162,7 @@ PLATFORMS
 
 DEPENDENCIES
   codeclimate-test-reporter (~> 0.4)
-  metric_fu (~> 4.11)
+  metric_fu (~> 4.12)
   relevator!
   rspec (~> 3.4)
   simplecov (~> 0.11)

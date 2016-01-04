@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 1.9.3
+- 2.0
+- 2.1
+- 2.2
+- 2.3
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+  hipchat:
+    rooms:
+      secure: A+qJR2rz42qyr4PbUfei2p9Ai6ZtzMGzL+oKFi9341/rMhmYuuQnLj3+Q80zM3VyFto2WWr/pry56OJd+DWLCWeU8Yii+BnI0whYqVYdLKz/QA48wei8tDkQfWScAeqys/RzIa2pQaEA4aYmdM/QtW6y1z/U8lKkwFlewOy7WACFuAOOWcxQ4FmVksv58JN+LeCSEltJUdBbf/SQuBN2HraHzsScLjEo73HTb9jXsh2W6b9ODgLVJ+hCVM/yQXS5f9VY09Eo9OVzN6Ov4IHWmucxH3KxCRnLSq73UEWk5QKjyggs7vy4AU7xyJNXCnic6uQPxx0Peln061QQEGT9+JVKfgdt5H8kDdiTb1mFD7OF65YOmfMqasmWW90OZCSbUjJetqDTRtJacc7uGpGIElrT/40dVCpaKVQTIOqTV7lR9gDkteQrEWOGE9hW3NvaMc5YTKlJG2HqBuAyYDJqL6xsdxbH7FkiqI23dlzFPFU4O9CHInCnKExLhjIHuh7sR0jpdOFtpL06MiRlyj3usa6Dnk7KPlqTMcY1P/jnK6ImO0VU3nzi39dJbItlL9OtvVXBfeibFV+8Ua7kx2WZEoBKMkuYzGypcxjufrqAYmLhEXERAwUAG3G76kM7MfDy6KX/pk3LHKmKD7Q5wcWdk8MEAPAFR3gbyf1Dq3TTyGY=
