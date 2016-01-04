@@ -1,146 +1,162 @@
-require 'spec_helper'
+describe Relevator::RelevantAttributesParser do
 
-RSpec.describe Relevator::RelevantAttributesParser do
+  describe "::parse" do
 
-  def attributes(expected_data)
-    described_class.parse(expected_data)
-  end
+    subject { described_class.parse(data) }
 
-  describe '#parse' do
+    context "when provided an array" do
 
-    context 'it receives an Array' do
+      let(:data) { [] }
 
-      let(:array_of_strings) do
-        [
-          'thing_one',
-          'thing_two',
-          'thing_three'
-        ]
+      it "returns a hash" do
+        expect(subject).to be_a(Hash)
       end
 
-      it 'should return a Hash' do
-        expect(attributes(array_of_strings)).to be_a Hash
-      end
+      context "containing strings" do
 
-      context 'of strings' do
+        let(:data) { %w{ thing_one thing_two thing_three } }
 
-        it 'should return an empty Hash' do
-          expect(attributes(array_of_strings).empty?).to be true
+        it "returns an empty hash" do
+          expect(subject.empty?).to be(true)
         end
 
       end
 
-      context 'of Hashes' do
+      context "containing hashes" do
 
-        let(:array_of_similar_objects) do
-          [
-            { :id       => 1, :name     => 'Travis' },
-            { :id       => 2, :name     => 'Tom'    },
-            { :id       => 3, :name     => 'Mark'   }
-          ]
+        context "that have identical attributes" do
+
+          let(:data) do
+            [
+              { :id => 1, :name => "Travis" },
+              { :id => 2, :name => "Tom"    },
+              { :id => 3, :name => "Mark"   }
+            ]
+          end
+
+          it "returns a hash containing all attributes" do
+            expect(subject).to eql({ :id => {}, :name => {} })
+          end
+
         end
-        let(:array_of_different_objects) do
-          [
-            { :id         => 1          },
-            { :name       => 'Travis'   },
-            { :type       => 'Drummer'  }
-          ]
+
+        context "that have different attributes" do
+
+          let(:data) do
+            [
+              { :id   => 1         },
+              { :name => "Travis"  },
+              { :type => "Drummer" }
+            ]
+          end
+
+          it "should return a Hash of the all properties" do
+            expect(subject).to eql({ :id => {}, :name => {}, :type => {} })
+          end
+
         end
-        let(:array_of_complex_objects) do
-          [
-            { :id       => 1, :person   =>
+
+        context "that contains nested hashes" do
+
+          let(:data) do
+            [
               {
-                :name       => 'Travis',
-                :type       => 'Drummer'
-              }
-            },
-            { :id       => 2, :person   =>
+                :id     => 1,
+                :person =>
+                  {
+                    :name => "Travis",
+                    :type => "Drummer"
+                  }
+              },
               {
-                :name       => 'Tom',
-                :type       => 'Guitar'
-              }
-            },
-            { :id       => 3, :person   =>
+                :id     => 2,
+                :person =>
+                  {
+                    :name => "Tom",
+                    :type => "Guitar"
+                  }
+              },
               {
-                :name       => 'Mark',
-                :type       => 'Bass'
+                :id     => 3,
+                :person =>
+                  {
+                    :name => "Mark",
+                    :type => "Bass"
+                  }
               }
-            },
-          ]
-        end
+            ]
+          end
 
-        it 'should return a Hash of the shared properties' do
-          expect(attributes(array_of_similar_objects)).to eq(
-            {:id => {}, :name => {}}
-          )
-        end
+          it "returns a hash containing hashes for the nested attributes" do
+            expect(subject).to eql({ :id => {}, :person => { :name => {}, :type => {} } })
+          end
 
-        it 'should return a Hash of the all properties' do
-          expect(attributes(array_of_different_objects)).to eq(
-            {:id => {}, :name => {}, :type => {}}
-          )
-        end
-
-        it 'should return a Hash of all nested properties' do
-          expect(attributes(array_of_complex_objects)).to eq(
-            {:id => {}, :person => {
-              :name => {}, :type => {}
-            }}
-          )
         end
 
       end
 
-      context 'of Arrays' do
+      context "containing arrays" do
 
-        let(:array_of_arrays) do
+        let(:data) do
           [
-            [1, 2, 3],
-            [:one, :two, :three]
+            [ 1, 2, 3 ],
+            [ :one, :two, :three ]
           ]
         end
 
-        it 'should return an empty Hash' do
-          expect(attributes(array_of_arrays)).to eq({})
+        it "returns an empty hash" do
+          expect(subject).to eql({})
         end
 
       end
 
     end
 
-    context 'it receives a Hash' do
+    context "when provided a hash" do
 
-      let(:complex_object) do
-        { :id       => 1, :person   =>
+      context "that contains simple attributes" do
+
+        let(:data) do
           {
-            :name       => 'Travis',
-            :type       => 'Drummer'
+            :id   => 1,
+            :name => "Peter",
+            :type => "Drummer"
           }
-        }
+        end
+
+        it "returns a hash containing the attributes" do
+          expect(subject).to eql({ :id => {}, :name => {}, :type => {} })
+        end
+
       end
 
-      it 'should return a Hash of all nested properties' do
-        expect(attributes(complex_object)).to eq(
-          {:id => {}, :person => {
-            :name => {}, :type => {}
-          }}
-        )
+      context "that contains nested attributes" do
+
+        let(:data) do
+          {
+            :id     => 1,
+            :person =>
+              {
+                :name => "Travis",
+                :type => "Drummer"
+              }
+          }
+        end
+
+        it "returns a hash containing a hash with the nested attributes" do
+          expect(subject).to eql({ :id => {}, :person => { :name => {}, :type => {} } })
+        end
+
       end
 
     end
 
-    context 'it receives a non-Hash non-Array value' do
+    context "when provided a value that is not enumerable" do
 
-      context 'when receiving a string' do
-        it 'should return an empty hash' do
-          expect(attributes('arbitrary')).to eq({})
-        end
-      end
+      let(:data) { "not enumerable" }
 
-      context 'when receiving an Object' do
-        it 'should return an empty hash' do
-          expect(attributes(Object.new)).to eq({})
-        end
+      it "returns an empty hash" do
+        expect(subject).to eql({})
       end
 
     end

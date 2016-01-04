@@ -1,34 +1,34 @@
-require 'spec_helper'
+describe Relevator::RelevantDataAdapter do
 
-RSpec.describe Relevator::RelevantDataAdapter do
+  let(:expected_data) { {} }
 
-  context '#initialize' do
+  let(:adapter) { described_class.new(expected_data) }
 
-    let(:expected_data) { {} }
+  describe "constructor" do
 
-    it 'should create a representation of attributes' do
-      expect(Relevator::RelevantAttributesParser).to(
-        receive(:parse).with(expected_data)
-      )
-      described_class.new(expected_data)
+    it "creates a view of the attributes within the expected data" do
+      expect(Relevator::RelevantAttributesParser).to receive(:parse).with(expected_data)
+
+      adapter
     end
 
   end
 
-  context '#adapt' do
+  context "#adapt" do
 
-    context 'with no relevant attributes' do
+    let(:relevant_attributes) { {} }
 
-      before(:each) do
-        allow(Relevator::RelevantAttributesParser).to(
-          receive(:parse).and_return({})
-        )
-      end
+    subject { adapter.adapt(actual_data) }
 
-      let(:expected_data) { {} }
-      let(:adapter) do
-        described_class.new(expected_data)
-      end
+    before(:each) do
+      allow(Relevator::RelevantAttributesParser).to receive(:parse).and_return(relevant_attributes)
+    end
+
+    context "when the expected data structure has no relevant attributes" do
+
+      let(:relevant_attributes) { {} }
+
+      context "and the actual data"
 
     end
 
