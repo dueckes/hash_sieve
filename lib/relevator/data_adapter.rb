@@ -1,8 +1,9 @@
 module Relevator
-  class RelevantDataAdapter
+
+  class DataAdapter
 
     def initialize(expected_data)
-      @all_relevant_attributes = Relevator::RelevantAttributesParser.parse(expected_data)
+      @all_relevant_attributes = Relevator::AttributeParser.parse(expected_data)
     end
 
     def adapt(actual_data)
@@ -41,4 +42,5 @@ module Relevator
     end
 
   end
+
 end

@@ -1,5 +1,6 @@
 module Relevator
-  class RelevantAttributesParser
+
+  class AttributeParser
 
     class << self
 
@@ -47,4 +48,5 @@ module Relevator
     end
 
   end
+
 end

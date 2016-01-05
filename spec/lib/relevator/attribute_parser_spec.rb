@@ -1,4 +1,4 @@
-describe Relevator::RelevantAttributesParser do
+describe Relevator::AttributeParser do
 
   describe "::parse" do
 
