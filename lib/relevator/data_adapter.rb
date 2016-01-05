@@ -14,7 +14,8 @@ module Relevator
 
     def adapt_value(value, relevant_attributes)
       if relevant_attributes
-        adapter_method = "adapt_#{value.class.name.underscore.downcase}_value".to_sym
+        klass_name = value.class.name.underscore.downcase
+        adapter_method = "adapt_#{klass_name}_value".to_sym
         if self.respond_to?(adapter_method, true)
           self.send(adapter_method, value, relevant_attributes)
         else
