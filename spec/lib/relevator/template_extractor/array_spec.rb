@@ -1,10 +1,10 @@
-describe Relevator::AttributeParser::Array do
+describe Relevator::TemplateExtractor::Array do
 
-  describe "::parse" do
+  describe "::extract" do
 
     let(:array) { [] }
 
-    subject { described_class.parse(array) }
+    subject { described_class.extract(array) }
 
     it "returns a hash" do
       expect(subject).to be_a(Hash)

@@ -1,11 +1,11 @@
 module Relevator
-  module AttributeParser
+  module TemplateExtractor
 
     class Array
 
-      def self.parse(array)
+      def self.extract(array)
         array.reduce({}) do |attributes, element|
-          Relevator::AttributeParser.parse(element).each do |candidate_key, candidate_value|
+          Relevator::TemplateExtractor.extract(element).each do |candidate_key, candidate_value|
             has_no_candidate_key = attributes[candidate_key].nil?
             attributes[candidate_key] = candidate_value if !candidate_value.empty? || has_no_candidate_key
           end

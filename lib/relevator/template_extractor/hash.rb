@@ -1,12 +1,12 @@
 module Relevator
-  module AttributeParser
+  module TemplateExtractor
 
     class Hash
 
-      def self.parse(hash)
+      def self.extract(hash)
         hash.reduce({}) do |attributes, entry|
           key, value = entry
-          attributes[key] = Relevator::AttributeParser.parse(value)
+          attributes[key] = Relevator::TemplateExtractor.extract(value)
           attributes
         end
       end

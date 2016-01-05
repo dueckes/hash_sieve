@@ -1,14 +1,14 @@
-describe Relevator::AttributeParser::Set do
+describe Relevator::TemplateExtractor::Set do
 
-  it "is identical to the array parser" do
-    expect(described_class).to eql(Relevator::AttributeParser::Array)
+  it "is identical to the array extractor" do
+    expect(described_class).to eql(Relevator::TemplateExtractor::Array)
   end
 
-  describe "::parse" do
+  describe "::extract" do
 
     let(:set) { ::Set.new }
 
-    subject { described_class.parse(set) }
+    subject { described_class.extract(set) }
 
     it "returns a hash" do
       expect(subject).to be_a(Hash)

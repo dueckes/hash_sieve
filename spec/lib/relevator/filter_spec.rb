@@ -6,8 +6,8 @@ describe Relevator::Filter do
 
   describe "constructor" do
 
-    it "parses a view of the attributes within the target data" do
-      expect(Relevator::AttributeParser).to receive(:parse).with(target_data)
+    it "extracts a template of the attributes within the target data" do
+      expect(Relevator::TemplateExtractor).to receive(:extract).with(target_data)
 
       filter
     end
@@ -18,11 +18,11 @@ describe Relevator::Filter do
 
     subject { filter.filter(actual_data) }
 
-    before(:each) { allow(Relevator::AttributeParser).to receive(:parse).and_return(relevant_attributes) }
+    before(:each) { allow(Relevator::TemplateExtractor).to receive(:extract).and_return(attribute_template) }
 
-    context "when the target data structure has no relevant attributes" do
+    context "when the template data structure has no attributes" do
 
-      let(:relevant_attributes) { {} }
+      let(:attribute_template) { {} }
 
       context "and an array of actual data is provided" do
 
@@ -70,13 +70,13 @@ describe Relevator::Filter do
 
     end
 
-    context "when the target data structure has relevant attributes" do
+    context "when the target data structure has attributes" do
 
       context "that are shallow" do
 
-        let(:relevant_attributes) { { :key => {}, :another_key => {} } }
+        let(:attribute_template) { { :key => {}, :another_key => {} } }
 
-        context "and a hash of actual data whose attributes exactly match the relevant attributes is provided" do
+        context "and a hash of actual data whose attributes exactly match the templated attributes is provided" do
 
           let(:actual_data) do
             {
@@ -91,7 +91,7 @@ describe Relevator::Filter do
 
         end
 
-        context "and a hash of data whose attributes are a superset of the relevant attributes is provided" do
+        context "and a hash of data whose attributes are a superset of the templated attributes is provided" do
 
           let(:actual_data) do
             {
@@ -101,7 +101,7 @@ describe Relevator::Filter do
             }
           end
 
-          it "returns a hash containing only those attributes and values that are relevant" do
+          it "returns a hash containing only those attributes and values that are templated" do
             expected_data = {
               :key         => "value",
               :another_key => "another value"
@@ -116,7 +116,7 @@ describe Relevator::Filter do
 
       context "that are nested" do
 
-        let(:relevant_attributes) { { :key => { :nested_key => {}, :another_nested_key => {} } } }
+        let(:attribute_template) { { :key => { :nested_key => {}, :another_nested_key => {} } } }
 
         context "when the nested types match" do
 
@@ -127,7 +127,7 @@ describe Relevator::Filter do
             }
           end
 
-          it "returns the relevant attributes" do
+          it "returns the templated attributes" do
             expected_data = {
               :key => { :nested_key => [ 1, 2, 3 ], :another_nested_key => Set.new([ 4, 5, 6 ]) }
             }
