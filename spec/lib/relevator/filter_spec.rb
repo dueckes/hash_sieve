@@ -1,22 +1,22 @@
-describe Relevator::Adapter do
+describe Relevator::Filter do
 
   let(:target_data) { {} }
 
-  let(:adapter) { described_class.new(target_data) }
+  let(:filter) { described_class.new(target_data) }
 
   describe "constructor" do
 
-    it "parsers a view of the attributes within the target data" do
+    it "parses a view of the attributes within the target data" do
       expect(Relevator::AttributeParser).to receive(:parse).with(target_data)
 
-      adapter
+      filter
     end
 
   end
 
-  context "#adapt" do
+  context "#filter" do
 
-    subject { adapter.adapt(actual_data) }
+    subject { filter.filter(actual_data) }
 
     before(:each) { allow(Relevator::AttributeParser).to receive(:parse).and_return(relevant_attributes) }
 
