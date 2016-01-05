@@ -1,12 +1,12 @@
-describe Relevator::Parser do
+describe Relevator::AttributeParser do
 
   describe "::parse" do
 
     subject { described_class.parse(data) }
 
-    { Array => Relevator::Parser::Array,
-      Set   => Relevator::Parser::Set,
-      Hash  => Relevator::Parser::Hash }.each do |data_type, parser|
+    { Array => Relevator::AttributeParser::Array,
+      Set   => Relevator::AttributeParser::Set,
+      Hash  => Relevator::AttributeParser::Hash }.each do |data_type, parser|
 
       context "when provided data that is a #{data_type.name}" do
 

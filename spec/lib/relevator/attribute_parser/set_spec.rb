@@ -1,7 +1,7 @@
-describe Relevator::Parser::Set do
+describe Relevator::AttributeParser::Set do
 
   it "is identical to the array parser" do
-    expect(described_class).to eql(Relevator::Parser::Array)
+    expect(described_class).to eql(Relevator::AttributeParser::Array)
   end
 
   describe "::parse" do

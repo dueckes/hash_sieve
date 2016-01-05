@@ -1,6 +1,6 @@
 module Relevator
 
-  module Parser
+  module AttributeParser
 
     class << self
 
@@ -13,7 +13,7 @@ module Relevator
 
       def parser_for(data)
         parsers = class_hierarchy_of(data.class).map do |candidate_class|
-          "Relevator::Parser::#{candidate_class.name}".constantize rescue nil
+          "Relevator::AttributeParser::#{candidate_class.name}".constantize rescue nil
         end
         parsers.empty? ? nil : parsers.first
       end

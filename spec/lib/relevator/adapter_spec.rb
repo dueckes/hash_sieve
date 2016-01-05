@@ -7,7 +7,7 @@ describe Relevator::Adapter do
   describe "constructor" do
 
     it "parsers a view of the attributes within the target data" do
-      expect(Relevator::Parser).to receive(:parse).with(target_data)
+      expect(Relevator::AttributeParser).to receive(:parse).with(target_data)
 
       adapter
     end
@@ -18,7 +18,7 @@ describe Relevator::Adapter do
 
     subject { adapter.adapt(actual_data) }
 
-    before(:each) { allow(Relevator::Parser).to receive(:parse).and_return(relevant_attributes) }
+    before(:each) { allow(Relevator::AttributeParser).to receive(:parse).and_return(relevant_attributes) }
 
     context "when the target data structure has no relevant attributes" do
 

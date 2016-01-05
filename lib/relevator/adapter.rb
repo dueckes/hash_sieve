@@ -3,7 +3,7 @@ module Relevator
   class Adapter
 
     def initialize(target_data)
-      @all_relevant_attributes = Relevator::Parser.parse(target_data)
+      @all_relevant_attributes = Relevator::AttributeParser.parse(target_data)
     end
 
     def adapt(actual_data)
