@@ -1,9 +1,9 @@
 module Relevator
 
-  class DataAdapter
+  class Adapter
 
-    def initialize(expected_data)
-      @all_relevant_attributes = Relevator::AttributeParser.parse(expected_data)
+    def initialize(target_data)
+      @all_relevant_attributes = Relevator::Parser.parse(target_data)
     end
 
     def adapt(actual_data)
@@ -30,7 +30,9 @@ module Relevator
       value.map { |entry| adapt_value(entry, relevant_attributes) }
     end
 
-    alias_method :adapt_set_value, :adapt_array_value
+    def adapt_set_value(value, relevant_attributes)
+      Set.new(adapt_array_value(value, relevant_attributes))
+    end
 
     def adapt_hash_value(value, relevant_attributes)
       value.reduce({}) do |adapted_hash, entry|
