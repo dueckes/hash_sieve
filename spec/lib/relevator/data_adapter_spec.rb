@@ -23,7 +23,7 @@ describe Relevator::DataAdapter do
       end
 
       before(:each) do
-        allow(Relevator::RelevantAttributesParser).to(
+        allow(Relevator::AttributeParser).to(
           receive(:parse).and_return({})
         )
       end
@@ -80,7 +80,7 @@ describe Relevator::DataAdapter do
           described_class.new(expected_data)
         end
         before(:each) do
-          allow(Relevator::RelevantAttributesParser).to(
+          allow(Relevator::AttributeParser).to(
             receive(:parse).and_return({})
           )
         end
@@ -99,7 +99,7 @@ describe Relevator::DataAdapter do
           described_class.new(expected_data)
         end
         before(:each) do
-          allow(Relevator::RelevantAttributesParser).to(
+          allow(Relevator::AttributeParser).to(
             receive(:parse).and_return({})
           )
         end
@@ -120,7 +120,7 @@ describe Relevator::DataAdapter do
           })
         end
         before(:each) do
-          allow(Relevator::RelevantAttributesParser).to(
+          allow(Relevator::AttributeParser).to(
             receive(:parse).and_return({:exists => {}})
           )
         end
@@ -160,7 +160,7 @@ describe Relevator::DataAdapter do
             }
           end
           before(:each) do
-            allow(Relevator::RelevantAttributesParser).to(
+            allow(Relevator::AttributeParser).to(
               receive(:parse).and_return({
                 :product => {
                   :type   => {},
@@ -213,7 +213,7 @@ describe Relevator::DataAdapter do
             }
           end
           before(:each) do
-            allow(Relevator::RelevantAttributesParser).to(
+            allow(Relevator::AttributeParser).to(
               receive(:parse).and_return({
                 :flavours => {},
                 :product  => {
@@ -241,7 +241,7 @@ describe Relevator::DataAdapter do
             described_class.new({:one => 'two'})
           end
           before(:each) do
-            allow(Relevator::RelevantAttributesParser).to(
+            allow(Relevator::AttributeParser).to(
               receive(:parse).and_return({
                 :one => {}
               })
