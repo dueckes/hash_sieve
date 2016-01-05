@@ -1,10 +1,9 @@
 describe Relevator::DataAdapter do
 
-  let(:expected_data) { {} }
-
-  let(:adapter) { described_class.new(expected_data) }
-
   describe "constructor" do
+
+    let(:expected_data) { {} }
+    let(:adapter) { described_class.new(expected_data) }
 
     it "creates a view of the attributes within the expected data" do
       expect(Relevator::AttributeParser).to receive(:parse).with(expected_data)
@@ -15,14 +14,6 @@ describe Relevator::DataAdapter do
   end
 
   context "#adapt" do
-
-    let(:relevant_attributes) { {} }
-
-    subject { adapter.adapt(actual_data) }
-
-    before(:each) do
-      allow(Relevator::AttributeParser).to receive(:parse).and_return(relevant_attributes)
-    end
 
     context "when the expected data structure has no relevant attributes" do
 
@@ -80,13 +71,18 @@ describe Relevator::DataAdapter do
 
     end
 
-    context 'with relevant attributes' do
+    context 'when the expected data structure has relevant attributes' do
 
       context 'with an array value' do
 
         let(:expected_data) { [9, 0, 2, 1, 0] }
         let(:adapter) do
           described_class.new(expected_data)
+        end
+        before(:each) do
+          allow(Relevator::RelevantAttributesParser).to(
+            receive(:parse).and_return({})
+          )
         end
 
         it 'should return the array of values' do
@@ -101,6 +97,11 @@ describe Relevator::DataAdapter do
         let(:expected_data) { [9, 0, 2, 1] }
         let(:adapter) do
           described_class.new(expected_data)
+        end
+        before(:each) do
+          allow(Relevator::RelevantAttributesParser).to(
+            receive(:parse).and_return({})
+          )
         end
 
         it 'should return the array of values' do
@@ -117,6 +118,11 @@ describe Relevator::DataAdapter do
             :exists         => 'dragons',
             :also_exists    => 'owls'
           })
+        end
+        before(:each) do
+          allow(Relevator::RelevantAttributesParser).to(
+            receive(:parse).and_return({:exists => {}})
+          )
         end
 
         it 'should return the filtered attributes' do
@@ -152,6 +158,16 @@ describe Relevator::DataAdapter do
             {
               :product   => 'non-existent'
             }
+          end
+          before(:each) do
+            allow(Relevator::RelevantAttributesParser).to(
+              receive(:parse).and_return({
+                :product => {
+                  :type   => {},
+                  :name   => {}
+                }
+              })
+            )
           end
 
           it 'should return the raw value' do
@@ -196,6 +212,17 @@ describe Relevator::DataAdapter do
               }
             }
           end
+          before(:each) do
+            allow(Relevator::RelevantAttributesParser).to(
+              receive(:parse).and_return({
+                :flavours => {},
+                :product  => {
+                  :type     => {},
+                  :name     => {}
+                }
+              })
+            )
+          end
 
           it 'should return the filtered attributes' do
             expect(adapter.adapt(raw_value)).to eq(expected_data)
@@ -212,6 +239,13 @@ describe Relevator::DataAdapter do
 
           let(:adapter) do
             described_class.new({:one => 'two'})
+          end
+          before(:each) do
+            allow(Relevator::RelevantAttributesParser).to(
+              receive(:parse).and_return({
+                :one => {}
+              })
+            )
           end
 
           it 'should return the value' do
