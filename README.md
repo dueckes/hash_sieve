@@ -7,8 +7,10 @@ Status
 ------
 
 [![Build Status](https://travis-ci.org/MYOB-Technology/hash_sieve.png)](https://travis-ci.org/MYOB-Technology/hash_sieve)
+[![Gem Version](https://badge.fury.io/rb/hash_sieve.png)](http://badge.fury.io/rb/hash_sieve)
 [![Code Climate](https://codeclimate.com/github/MYOB-Technology/hash_sieve/badges/gpa.svg)](https://codeclimate.com/github/MYOB-Technology/hash_sieve)
 [![Test Coverage](https://codeclimate.com/github/MYOB-Technology/hash_sieve/badges/coverage.svg)](https://codeclimate.com/github/MYOB-Technology/hash_sieve/coverage)
+[![Dependency Status](https://gemnasium.com/MYOB-Technology/hash_sieve.png)](https://gemnasium.com/MYOB-Technology/hash_sieve)
 
 Motivation
 ----------
@@ -22,17 +24,34 @@ Usage
 
 strained_hash = HashSieve.strain(
   {
-    entry_i_need: "important value",
-    entry_i_dont_need: "unimportant value"
+    needed:     "important value",
+    not_needed: "unimportant value"
   },
-  template: { entry_i_need: "" }
+  template: { needed: "" }
 )
 
-# strained_hash contains { entry_i_need: "important value" }
-
+# strained_hash contains { needed: "important value" }
 ```
 
-Note that ```hash_sieve``` will also traverse ```Enumerable```s such as ```Array```s and ```Set```s.
+```hash_sieve``` supports ```strain```ing and traversing ```Enumerable```s such as ```Array```s and ```Set```s.
+
+```ruby
+strained_array = HashSieve.strain(
+  [
+    {
+      needed_array: [
+        {
+          needed_string: "important value"
+        }
+      ],
+      not_needed: "unimportant value"
+    }
+  ],
+  template: [ { needed_array: [ { needed_string: "" } ] } ]
+)
+
+# strained_array contains [ { needed_array: [ { needed_string: "important value" } ] } ]
+```
 
 Installation
 ------------
