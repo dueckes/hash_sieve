@@ -1,24 +1,24 @@
-describe Relevator::Filter do
+describe HashSieve::Sieve do
 
   let(:target_data) { {} }
 
-  let(:filter) { described_class.new(target_data) }
+  let(:sieve) { described_class.new(target_data) }
 
   describe "constructor" do
 
     it "extracts a template of the attributes within the target data" do
-      expect(Relevator::TemplateExtractor).to receive(:extract).with(target_data)
+      expect(HashSieve::TemplateExtractor).to receive(:extract).with(target_data)
 
-      filter
+      sieve
     end
 
   end
 
-  context "#filter" do
+  context "#strain" do
 
-    subject { filter.filter(actual_data) }
+    subject { sieve.strain(actual_data) }
 
-    before(:each) { allow(Relevator::TemplateExtractor).to receive(:extract).and_return(attribute_template) }
+    before(:each) { allow(HashSieve::TemplateExtractor).to receive(:extract).and_return(attribute_template) }
 
     context "when the template data structure has no attributes" do
 

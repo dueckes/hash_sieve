@@ -1,7 +1,7 @@
-describe Relevator::TemplateExtractor::Set do
+describe HashSieve::TemplateExtractor::Set do
 
   it "is identical to the array extractor" do
-    expect(described_class).to eql(Relevator::TemplateExtractor::Array)
+    expect(described_class).to eql(HashSieve::TemplateExtractor::Array)
   end
 
   describe "::extract" do

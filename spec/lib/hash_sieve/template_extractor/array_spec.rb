@@ -1,4 +1,4 @@
-describe Relevator::TemplateExtractor::Array do
+describe HashSieve::TemplateExtractor::Array do
 
   describe "::extract" do
 

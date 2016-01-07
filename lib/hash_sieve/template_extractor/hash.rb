@@ -1,4 +1,4 @@
-module Relevator
+module HashSieve
   module TemplateExtractor
 
     class Hash
@@ -6,7 +6,7 @@ module Relevator
       def self.extract(hash)
         hash.reduce({}) do |attributes, entry|
           key, value = entry
-          attributes[key] = Relevator::TemplateExtractor.extract(value)
+          attributes[key] = HashSieve::TemplateExtractor.extract(value)
           attributes
         end
       end

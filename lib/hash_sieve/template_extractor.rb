@@ -1,4 +1,4 @@
-module Relevator
+module HashSieve
 
   module TemplateExtractor
 
@@ -13,7 +13,7 @@ module Relevator
 
       def extractor_for(data)
         extractors = class_hierarchy_of(data.class).map do |candidate_class|
-          "Relevator::TemplateExtractor::#{candidate_class.name}".constantize rescue nil
+          "HashSieve::TemplateExtractor::#{candidate_class.name}".constantize rescue nil
         end
         extractors.empty? ? nil : extractors.first
       end

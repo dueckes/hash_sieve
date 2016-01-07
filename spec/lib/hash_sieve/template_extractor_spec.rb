@@ -1,12 +1,12 @@
-describe Relevator::TemplateExtractor do
+describe HashSieve::TemplateExtractor do
 
   describe "::extract" do
 
     subject { described_class.extract(data) }
 
-    { Array => Relevator::TemplateExtractor::Array,
-      Set   => Relevator::TemplateExtractor::Set,
-      Hash  => Relevator::TemplateExtractor::Hash }.each do |data_type, extractor|
+    { Array => HashSieve::TemplateExtractor::Array,
+      Set   => HashSieve::TemplateExtractor::Set,
+      Hash  => HashSieve::TemplateExtractor::Hash }.each do |data_type, extractor|
 
       context "when provided data that is a #{data_type.name}" do
 

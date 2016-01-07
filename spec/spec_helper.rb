@@ -9,4 +9,4 @@ SimpleCov.start do
   refuse_coverage_drop
 end if ENV["coverage"]
 
-require 'relevator'
+require 'hash_sieve'

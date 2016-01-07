@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 $:.push ::File.expand_path("../lib", __FILE__)
-require "relevator/version"
+require "hash_sieve/version"
 
 Gem::Specification.new do |spec|
-  spec.name        = "relevator"
-  spec.version     = Relevator::VERSION
+  spec.name        = "hash_sieve"
+  spec.version     = HashSieve::VERSION
   spec.platform    = Gem::Platform::RUBY
   spec.authors     = [ "Andrew King", "Matthew Ueckerman" ]
-  spec.summary     = "Adapts enumerable objects to the same pattern as a reference object"
-  spec.description = "Adapts enumerable objects to the same pattern as a reference object"
+  spec.summary     = "Strains unwanted hash attributes from enumerable objects"
+  spec.description = "Strains unwanted hash attributes from enumerable objects, a template object forms the Sieve"
   spec.email       = "andrew.king@myob.com"
-  spec.homepage    = "http://github.com/MYOB-Technology/relevator"
+  spec.homepage    = "http://github.com/MYOB-Technology/hash_sieve"
   spec.license     = "MIT"
 
   spec.files      = Dir.glob("./lib/**/*")
