@@ -1,9 +1,8 @@
 PATH
   remote: .
   specs:
-    hash_sieve (0.0.1)
+    hash_sieve (0.0.2)
       activesupport (~> 4.2)
-      rake (~> 10.4)
 
 GEM
   remote: http://rubygems.org/
@@ -105,7 +104,6 @@ GEM
       require_all
       ruby-progressbar
     rainbow (2.0.0)
-    rake (10.4.2)
     redcard (1.1.0)
     reek (2.2.1)
       parser (~> 2.2)
@@ -127,7 +125,7 @@ GEM
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
-    rspec-mocks (3.4.0)
+    rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
