@@ -68,7 +68,7 @@ GEM
       chronic (>= 0.6.2)
       fattr (>= 2.2.0)
       map (>= 6.1.0)
-    map (6.5.5)
+    map (6.6.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     metric_fu (4.12.0)
@@ -104,6 +104,7 @@ GEM
       require_all
       ruby-progressbar
     rainbow (2.0.0)
+    rake (10.5.0)
     redcard (1.1.0)
     reek (2.2.1)
       parser (~> 2.2)
@@ -162,6 +163,7 @@ DEPENDENCIES
   codeclimate-test-reporter (~> 0.4)
   hash_sieve!
   metric_fu (~> 4.12)
+  rake (~> 10.5)
   rspec (~> 3.4)
   simplecov (~> 0.11)
   travis-lint (~> 2.0)
