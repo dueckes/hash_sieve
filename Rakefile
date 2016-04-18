@@ -10,11 +10,6 @@ task :clobber do
   puts "Clobbered"
 end
 
-desc "Complexity analysis"
-task :metrics do
-  print `metric_fu --no-open`
-end
-
 desc "Exercises specifications"
 ::RSpec::Core::RakeTask.new(:spec)
 
@@ -40,6 +35,6 @@ namespace :coverage do
 
 end
 
-task :default => %w{ clobber metrics coverage }
+task :default => %w{ clobber coverage }
 
-task :pre_commit => %w{ clobber metrics coverage:show validate }
+task :pre_commit => %w{ clobber coverage:show validate }
